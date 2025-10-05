@@ -1,0 +1,4 @@
+PLAYER_X = "X"
+PLAYER_O = "O"
+EMPTY_CELL = " "
+BOARD_SIZE = 3

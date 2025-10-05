@@ -1,29 +1,10 @@
-def print_board(board):
-    print()
-    for row in board:
-        print(" | ".join(row))
-        print("-" * 5)
-    print()
+from .utils import create_board, print_board, check_winner, is_full
+from .player import switch_player
+from .constants import PLAYER_X, PLAYER_O
 
-def check_winner(board, player):
-    for row in board:
-        if all(cell == player for cell in row):
-            return True
-    for col in range(3):
-        if all(board[row][col] == player for row in range(3)):
-            return True
-    if all(board[i][i] == player for i in range(3)):
-        return True
-    if all(board[i][2 - i] == player for i in range(3)):
-        return True
-    return False
-
-def is_full(board):
-    return all(cell in ["X", "O"] for row in board for cell in row)
-
-def tic_tac_toe():
-    board = [[str(3 * r + c + 1) for c in range(3)] for r in range(3)]
-    current_player = "X"
+def play_game():
+    board = create_board()
+    current_player = PLAYER_X
 
     while True:
         print_board(board)
@@ -36,7 +17,7 @@ def tic_tac_toe():
         move = int(move) - 1
         row, col = divmod(move, 3)
 
-        if board[row][col] in ["X", "O"]:
+        if board[row][col] in [PLAYER_X, PLAYER_O]:
             print("That spot is already taken! Try again.")
             continue
 
@@ -51,7 +32,7 @@ def tic_tac_toe():
             print("It's a draw!")
             break
 
-        current_player = "O" if current_player == "X" else "X"
+        current_player = switch_player(current_player)
 
 if __name__ == "__main__":
-    tic_tac_toe()
+    play_game()
