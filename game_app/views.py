@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .logic.tictactoe import check_winner 
+from .logic.tictactoe.tictactoe import check_winner 
 
 def home(request):
     return render(request, 'games/index.html')
